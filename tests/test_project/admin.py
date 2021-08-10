@@ -55,7 +55,7 @@ class ProjectAdmin(UUIDAdmin, ReceiveUrlAdmin):
 class ShelfAdmin(TimeReadonlyAdminMixin, admin.ModelAdmin):
     # DO NOT CHANGE: used for testing filters
     list_filter = [
-        'books_type',
+        'book_type',
         'name',
         'owner__username',
         'owner__is_staff',

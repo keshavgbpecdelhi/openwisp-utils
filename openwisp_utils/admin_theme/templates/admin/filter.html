@@ -1,6 +1,6 @@
-{% load i18n %}
+{% load i18n filter_tags %}
 
-<div class="ow-filter">
+<div class="ow-filter {{ title|create_filter_class }}">
   {% for choice in choices %}
     {% if choice.selected %}
       <div class="filter-title" title="{{ choice.display }}">

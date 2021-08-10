@@ -274,7 +274,7 @@ class TestAdmin(AdminTestMixin, CreateMixin, TestCase):
             response = self.client.get(url)
             real_count = self._assert_contains(
                 response,
-                'class="ow-filter"',
+                'class="ow-filter',
                 status_code=response.status_code,
                 msg_prefix='',
                 html=False,
@@ -287,7 +287,7 @@ class TestAdmin(AdminTestMixin, CreateMixin, TestCase):
             response = self.client.get(url)
             real_count = self._assert_contains(
                 response,
-                'class="ow-filter"',
+                'class="ow-filter',
                 status_code=response.status_code,
                 msg_prefix='',
                 html=False,
