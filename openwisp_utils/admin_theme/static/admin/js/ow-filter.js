@@ -2,6 +2,8 @@
 var leftArrow, rightArrow, slider;
 const scrollDX = 200,
   btnAnimationTime = 100; //ms
+var gettext;
+
 (function () {
   document.addEventListener(
     'DOMContentLoaded',
@@ -15,6 +17,8 @@ const scrollDX = 200,
       if (slider) {
         setArrowButtonVisibility();
       }
+      gettext = window.gettext || function (v) { return v; };
+      add_clear_button();
     },
     false
   );
@@ -27,18 +31,18 @@ function initFilterDropdownHandler() {
     var toggler = filter.querySelector('.filter-title');
     toggler.addEventListener('click', function () {
       // Close if any active filter
-      var activeFilter = document.querySelector('.ow-filter.active');
+      var activeFilter = document.querySelector('.ow-filter.ow-active');
       if (activeFilter && activeFilter !== filter) {
-        activeFilter.classList.remove('active');
+        activeFilter.classList.remove('ow-active');
       }
-      filter.classList.toggle('active');
+      filter.classList.toggle('ow-active');
     });
   });
   // Handle click outside of an active filter
   document.addEventListener('click', function (e) {
-    var activeFilter = document.querySelector('.ow-filter.active');
+    var activeFilter = document.querySelector('.ow-filter.ow-active');
     if (activeFilter && !activeFilter.contains(e.target)) {
-      activeFilter.classList.remove('active');
+      activeFilter.classList.remove('ow-active');
     }
   });
   // Handle change in filter option
@@ -55,7 +59,7 @@ function initFilterDropdownHandler() {
       var text = filterValue.innerHTML;
       selectedOption.innerHTML = text;
       filter.querySelector('.filter-title').setAttribute('title', text);
-      filter.classList.remove('active');
+      filter.classList.remove('ow-active');
     });
   });
 }
@@ -186,4 +190,24 @@ function filterHandlers() {
     }
     window.location.href = window.location.pathname + queryParams;
   });
+}
+
+function add_clear_button(){
+  /*
+  Some django versions do not support filter clear functionality
+  */ 
+  var path = window.location.href.split('?');
+  if (
+    path.length > 1 &&
+    path[1] != '' &&
+    !document.querySelector('#changelist-filter-clear')
+  ) {
+    var button = document.createElement('h3');
+    button.setAttribute('id', 'changelist-filter-clear');
+    var link = document.createElement('a');
+    link.setAttribute('href', path[0]);
+    link.innerText = gettext('Clear all filters');
+    button.appendChild(link);
+    document.querySelector('.filters-control').prepend(button);
+  }
 }

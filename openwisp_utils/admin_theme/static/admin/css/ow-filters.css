@@ -101,7 +101,7 @@
   letter-spacing: 0.5px;
   font-size: 14px;
 }
-.ow-filter.active .filter-title {
+.ow-filter.ow-active .filter-title {
   border-color: #df5d43;
   color: #df5d43;
 }
@@ -111,7 +111,7 @@
   border-radius: 4px;
   margin: 0.12rem;
 }
-.ow-filter.active .filter-options {
+.ow-filter.ow-active .filter-options {
   pointer-events: all;
   max-height: 18.75rem;
   overflow-y: auto;

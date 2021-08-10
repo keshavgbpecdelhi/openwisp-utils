@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.urls import reverse
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -17,7 +18,8 @@ class TestFilter(SeleniumTestCase):
     def setUpClass(cls):
         super().setUpClass()
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--headless')
+        if getattr(settings, 'SELENIUM_HEADLESS', True):
+            chrome_options.add_argument('--headless')
         chrome_options.add_argument('--window-size=1366,768')
         chrome_options.add_argument('--ignore-certificate-errors')
         chrome_options.add_argument('--remote-debugging-port=9222')
