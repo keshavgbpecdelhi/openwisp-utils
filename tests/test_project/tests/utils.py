@@ -122,8 +122,5 @@ class SeleniumTestCase(StaticLiveServerTestCase):
     def _get_main_content(self):
         return self.web_driver.find_element_by_id('main-content')
 
-    def _get_filter_option(self, option_name):
-        return self.web_driver.find_element_by_xpath(f'//label[@for="{option_name}"]')
-
-    def _get_filter_anchor(self, query):
+    def _get_filter_option(self, query):
         return self.web_driver.find_element_by_xpath(f'//a[@href="?{query}"]')

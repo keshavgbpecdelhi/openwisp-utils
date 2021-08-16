@@ -51,9 +51,9 @@ function initFilterDropdownHandler() {
   filterValues.forEach(function (filterValue) {
     filterValue.addEventListener('click', function (e) {
       e.preventDefault();
-      let filter = document.querySelector('.ow-filter.active');
-      let selectedOption = filter.querySelector('.selected-option');
-      let selectedElement = filter.querySelector('.selected');
+      var filter = document.querySelector('.ow-filter.ow-active');
+      var selectedOption = filter.querySelector('.selected-option');
+      var selectedElement = filter.querySelector('.selected');
       selectedElement.classList.remove('selected');
       filterValue.classList.add('selected');
       var text = filterValue.innerHTML;

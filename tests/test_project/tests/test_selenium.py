@@ -79,11 +79,6 @@ class TestFilter(SeleniumTestCase):
         with self.subTest('Test filter dropdown is not visible'):
             self.assertEqual(dropdown.is_displayed(), False)
 
-        with self.subTest('Test input tag in filter options'):
-            self.assertEqual(
-                self.check_exists_by_css_selector('.username .filter-options input'),
-                True,
-            )
         with self.subTest('Test filter dropdown is visble on click'):
             title.click()
             self.assertEqual(dropdown.is_displayed(), True)
@@ -97,7 +92,7 @@ class TestFilter(SeleniumTestCase):
         with self.subTest('Test changing of filter option'):
             title.click()  # open dropdown
             old_value = selected_option.get_attribute('innerText')
-            fantasy_option = self._get_filter_option('Book typeFANTASY')
+            fantasy_option = self._get_filter_option('book_type__exact=FANTASY')
             fantasy_option.click()
             self.assertEqual(dropdown.is_displayed(), False)
             self.assertNotEqual(selected_option.get_attribute('innerText'), old_value)
@@ -127,10 +122,10 @@ class TestFilter(SeleniumTestCase):
             book_type_title = self._get_filter_title('book-type')
             username_title = self._get_filter_title('username')
             book_type_title.click()
-            fantasy_option = self._get_filter_option('Book typeFANTASY')
+            fantasy_option = self._get_filter_option('book_type__exact=FANTASY')
             fantasy_option.click()
             username_title.click()
-            username_option = self._get_filter_option('usernametester2')
+            username_option = self._get_filter_option('owner__username=tester2')
             username_option.click()
             filter_button = self._get_filter_button()
             filter_button.click()
@@ -159,7 +154,7 @@ class TestFilter(SeleniumTestCase):
         with self.subTest('Test dropdown and apply filter'):
             dropdown = self._get_filter_dropdown('username')
             title = self._get_filter_title('username')
-            option = self._get_filter_anchor('username=tester2')
+            option = self._get_filter_option('username=tester2')
             selected_option = self._get_filter_selected_option('username')
             old_value = selected_option.get_attribute('innerText')
             self.assertEqual(dropdown.is_displayed(), False)
